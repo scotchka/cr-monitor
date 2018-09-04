@@ -15,8 +15,8 @@ def get_review_count():
 
 
 def send_alert():
-	from_email = Email("henry@hackbrightacademy.com")
-	to_email = Email("henry@hackbrightacademy.com")
+	from_email = Email("tahafut@gmail.com")
+	to_email = Email("tahafut@gmail.com")
 	subject = "new review"
 	content = Content("text/plain", "https://www.coursereport.com/schools/hackbright-academy")
 	mail = Mail(from_email, subject, to_email, content)
