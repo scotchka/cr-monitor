@@ -6,6 +6,7 @@ import os
 from sendgrid.helpers.mail import Email, Content, Mail
 
 sg = sendgrid.SendGridAPIClient(apikey=os.environ.get('SENDGRID_API_KEY'))
+EMAIL = os.environ['EMAIL']
 
 def get_review_count():
 	r  = requests.get("https://www.coursereport.com/schools/hackbright-academy")
@@ -15,8 +16,8 @@ def get_review_count():
 
 
 def send_alert():
-	from_email = Email("tahafut@gmail.com")
-	to_email = Email("tahafut@gmail.com")
+	from_email = Email(EMAIL)
+	to_email = Email(EMAIL)
 	subject = "new review"
 	content = Content("text/plain", "https://www.coursereport.com/schools/hackbright-academy")
 	mail = Mail(from_email, subject, to_email, content)
