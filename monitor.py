@@ -12,7 +12,7 @@ def get_review_count():
 	r  = requests.get("https://www.coursereport.com/schools/hackbright-academy")
 	soup = BeautifulSoup(r.text, features="html.parser")
 	span = soup.find(attrs={'itemprop': 'reviewCount'})
-	return span.text
+	return int(span.text)
 
 
 def send_alert():
@@ -27,17 +27,18 @@ def send_alert():
 	print(response.headers)
 
 with open('count.txt') as f:
-	count = f.read()
+	count = int(f.read())
 
 print('count', count)
 
 while True:
 	new_count = get_review_count()
 	if new_count != count:
+		if new_count > count:
+			send_alert()
 		count = new_count
-		send_alert()
 		with open('count.txt', 'w') as f:
-			f.write(count)
+			f.write(str(count))
 		print('count updated:', count)
 	else:
 		print('no change')
