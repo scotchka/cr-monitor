@@ -32,7 +32,11 @@ with open('count.txt') as f:
 print('count', count)
 
 while True:
-	new_count = get_review_count()
+	try:
+		new_count = get_review_count()
+	except Exception as e:
+		print(e)
+
 	if new_count != count:
 		if new_count > count:
 			send_alert()
